@@ -33,14 +33,14 @@ const main = async () => {
           if ((args[0] as any).isLegacy) {
             isEthereumTransfer = isEthereum && (args[0] as any).asLegacy.input.length === 0 && (args[0] as any).asLegacy.action.isCall
           }
-          else if (((args[0] as any). isEip1559)) {
+          else if (((args[0] as any).isEip1559)) {
             isEthereumTransfer = isEthereum && (args[0] as any).asEip1559.input.length === 0 && (args[0] as any).asEip1559.action.isCall
           }
           else if (((args[0] as any).isEip2930)) {
             isEthereumTransfer = isEthereum && (args[0] as any).asEip2930.input.length === 0 && (args[0] as any).asEip2930.action.isCall
           }
       }
-      
+
       // Retrieve all events for this extrinsic
       const events = records.filter(
         ({ phase }) => phase.isApplyExtrinsic && phase.asApplyExtrinsic.eq(index)
