@@ -1,0 +1,23 @@
+{
+  "name": "web3example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "Module": "commonJS",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@polkadot/api": "^6.9.1",
+    "moonbeam-types-bundle": "^2.0.1",
+    "solc": "^0.8.0",
+    "typescript": "4.3.2",
+    "web3": "^1.5.2"
+  },
+  "devDependencies": {
+    "truffle-plugin-verify": "^0.5.20"
+  }
+}
