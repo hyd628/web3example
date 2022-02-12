@@ -11,7 +11,7 @@ const providerRPC = {
 const web3 = new Web3(providerRPC.moonriver); //Change to correct network
 
 const account_from = {
-   privateKey: '5fb92d6e98884f76de468fa3f6278f8807c48bebc13595d45af5bdc4da702133',
+   privateKey: '',
    address: '0xf24FF3a9CF04c71Dbc94D0b566f7A27B94566cac',
 };
 const addressTo = '0x44236223aB4291b93EEd10E4B511B37a398DEE55'; // Change addressTo
