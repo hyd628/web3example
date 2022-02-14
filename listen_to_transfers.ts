@@ -26,20 +26,16 @@ const main = async () => {
 
       const isEthereum = section == "ethereum" && method == "transact";
 
-      //check if the extrinsic is an Ethereum transfer
-      var isEthereumTransfer = new Boolean(false)
+      //Gets the transaction object
+      const tx = (args[0] as any);
 
-      if (isEthereum) {
-          if ((args[0] as any).isLegacy) {
-            isEthereumTransfer = isEthereum && (args[0] as any).asLegacy.input.length === 0 && (args[0] as any).asLegacy.action.isCall
-          }
-          else if (((args[0] as any).isEip1559)) {
-            isEthereumTransfer = isEthereum && (args[0] as any).asEip1559.input.length === 0 && (args[0] as any).asEip1559.action.isCall
-          }
-          else if (((args[0] as any).isEip2930)) {
-            isEthereumTransfer = isEthereum && (args[0] as any).asEip2930.input.length === 0 && (args[0] as any).asEip2930.action.isCall
-          }
-      }
+      // Convert to the correct Ethereum Transaction format
+      const ethereumTx = isEthereum && 
+        ((tx.isLegacy && tx.asLegacy) ||
+        (tx.isEip1559 && tx.asEip1559) ||
+        (tx.isEip2930 && tx.asEip2930));
+
+      const isEthereumTransfer = ethereumTx && ethereumTx.input.length === 0 && ethereumTx.action.isCall;
 
       // Retrieve all events for this extrinsic
       const events = records.filter(
