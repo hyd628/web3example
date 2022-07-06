@@ -5,16 +5,40 @@ const Web3 = require('web3');
 */
 // Provider
 const providerRPC = {
-   moonriver: 'https://rpc.api.moonriver.moonbeam.network',
+   development: 'http://localhost:9933',
    moonbase: 'https://rpc.api.moonbase.moonbeam.network',
+   ropsten: "https://ropsten.infura.io/v3/77509e6d9cfb47aaaf11f2f91dca36ef"
 };
-const web3 = new Web3(providerRPC.moonriver); //Change to correct network
 
 const account_from = {
    privateKey: '',
-   address: '0xbCE85847d4EE95DA1cF34c9e7415E253b0Dc36c3',
+   address: '',
 };
-const addressTo = '0x44236223aB4291b93EEd10E4B511B37a398DEE55'; // Change addressTo
+const addressTo = ''; // Change addressTo
+
+const args = process.argv;
+//console.log(args);
+
+var web3 = null;
+
+switch (args[3]) {
+   case 'development':
+      web3 = new Web3(providerRPC.development);
+      break;
+   case 'moonbase':
+      web3 = new Web3(providerRPC.moonbase);
+      break;
+   case 'ropsten':
+      web3 = new Web3(providerRPC.ropsten);
+      break;
+   default:
+      console.log("network not supported")
+      process.exit(1)
+}
+
+ //Change to correct network
+
+
 
 /*
    -- Create and Deploy Transaction --
@@ -24,13 +48,15 @@ const deploy = async () => {
       `Attempting to send transaction from ${account_from.address} to ${addressTo}`
    );
 
+   const _nonce = await web3.eth.getTransactionCount(account_from.address);
+
    // Sign Tx with PK
    const createTransaction = await web3.eth.accounts.signTransaction(
       {
-         maxPriorityFeePerGas: 50000,
+         gas: 21000,
          to: addressTo,
-         value: web3.utils.toWei('0.00005', 'ether'),
-         type: "0x02"
+         nonce: _nonce,
+         value: web3.utils.toWei('0.1', 'ether'),
       },
       account_from.privateKey
    );
