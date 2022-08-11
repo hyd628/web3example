@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "Module": "commonJS",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@polkadot/api": "^6.9.1",
+    "@polkadot/api": "^9.1.1",
     "moonbeam-types-bundle": "^2.0.1",
     "solc": "^0.8.0",
     "typescript": "4.3.2",
